@@ -5,7 +5,7 @@
             <div class="border-left border-primary" style="padding:10px">
                 <h2 style='font-size:large'>{{myTitle}} [{{plusButton}}]</h2>
                 <div class="col-sm-8 col-sm-offset-2">
-                    <transition>
+                    <transition name="text">
                         <div  id="mainText"  v-show="show">{{myText}}</div>
                     </transition>
                 </div>
@@ -17,13 +17,13 @@
     #mainText{
         white-space:pre-wrap;
     }
-    .v-enter,.v-leave-to{
+    .text-enter,.text-leave-to{
         opacity:0;
     }
-    .v-enter-to,.vleave{
+    .text-enter-to,.text-leave{
         opacity:1;
     }
-    .v-enter-active,.v-leave-active{
+    .text-enter-active,.text-leave-active{
         transition:all 500ms;
     }
 </style>
@@ -51,7 +51,6 @@
                     this.plusButton="+"
                 }
             },
-
         },
     }
 </script>

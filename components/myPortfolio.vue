@@ -1,6 +1,6 @@
 <template class="scroll">
-<div class="stripe"></div>
 <div id="top" class="about">
+    <OpeningView/>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
      <a class="navbar-brand" href="#top">My Portfolio</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,13 +40,12 @@
                 ></ContentButton>
                 <ContentButton selfId="skill" myColor="yellow" myTitle="スキル"
                 myText="使える言語
-                C:大学1回生から使い始めた。ポインタが難しい…ｗ
-                Python:大学３回生から始めた。Cと比べると、シンプルだが、なかなか慣れない。
+                C：大学1回生から使い始めた。ポインタが難しい…ｗ
+                Python：大学３回生から始めた。Cと比べると、シンプルだが、なかなか慣れない。
                 勉強中
-                HTML:大学３回生の夏に始めた。テーブル操作のついでに勉強し始めた。
+                HTML：大学３回生の夏に始めた。テーブル操作のついでに勉強し始めた。
                 CSS:HTMLを学ぶついでに一緒にやった。Javascriptとかと絡むとややこしい
-                Javascript:インターンシップで勉強を始めた。文法がCと似ていてなれるのに時間がかからなかった。
-                だけど、フレームワーク独自の文法もあるのでそこにはてこずっている。"
+                Javascript：インターンシップで勉強を始めた。フレームワーク独自の文法にてこずっている。"
                 ></ContentButton>
                 <ContentButton selfId="contet" myColor="aqua" myTitle="コンテンツ" myText="404ページ"
                 ></ContentButton>
@@ -62,36 +61,30 @@
     'border-style':'solid','border-width':2+'px','border-color':'black'}"
      @click="removeLine"></div>
      </div>
-
 </div>
 </template>
 <style>
 #top{
     transition:fixed;
-    position:(0,0);
 }
+
 .sq{
     background:yellow;
     Height:100px;
     Width:200px;
     border:solid 2px black;
 }
-.stripe{
-    Height:100%;
-    background:repeating-linear-gradient(
-        yellow 0,yellow 20px, orange 20px, orange 40px
-    );
-}
 </style>
 <script>
 import ContentButton from './ContentButton.vue'
+import OpeningView from './openingView.vue';
     export default{
     data() {
         return {
             sqPos: 100,
             FLAG: true,
             plusButton: "+",
-            show: "none"
+            showNav:"hidden",
         };
     },
     methods: {
@@ -105,17 +98,8 @@ import ContentButton from './ContentButton.vue'
             if (this.sqPos < 100)
                 this.FLAG = true;
         },
-        showing() {
-            if (this.show === "none") {
-                this.show = "contents";
-                this.plusButton = "-";
-            }
-            else {
-                this.show = "none";
-                this.plusButton = "+";
-            }
-        }
+
     },
-    components: { ContentButton }
+    components: { ContentButton,OpeningView }
 }
 </script>
