@@ -1,6 +1,7 @@
 <template class="scroll">
-<div class="about">
-    <nav  id="top" class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
+<div class="stripe"></div>
+<div id="top" class="about">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
      <a class="navbar-brand" href="#top">My Portfolio</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -16,6 +17,9 @@
               <li class="nav-item">
                   <a class="nav-link" href="#skill">スキル</a>
               </li>
+              <li class="nav-item">
+                    <a class="nav-link" href="#contet">コンテンツ</a>
+              </li>
          </ul>
      </div>
     </nav>
@@ -26,18 +30,25 @@
     <div class="jumbotron" style="{margin:auto}">
         <div class="container-fluid">
             <div class="line">
-                <ContentButton myColor="#98fb98" myTitle="プロフィール" myText="
-                    年齢:21歳<br>
-                    趣味:ゲーム、旅行<br/>
-                    あああああああああああああああああああああああああああああああああああああああああああああああ
-                    あああああああああああああああああああああああああああああああああああああああああああ"
+                <ContentButton selfId="prof" myColor="#98fb98" myTitle="プロフィール" 
+                myText="
+                名前:マオ
+                年齢:21歳
+                趣味:ゲーム:オンラインゲームやスマブラ、アクションゲームを中心に遊んでいます
+                旅行
+                鉄道旅にはまっています。"
                 ></ContentButton>
-                <ContentButton myColor="yellow" myTitle="スキル" myText="
-                    使える言語:C, Python
-                    勉強中:HTML, CSS, Javascript"
+                <ContentButton selfId="skill" myColor="yellow" myTitle="スキル"
+                myText="使える言語
+                C:大学1回生から使い始めた。ポインタが難しい…ｗ
+                Python:大学３回生から始めた。Cと比べると、シンプルだが、なかなか慣れない。
+                勉強中
+                HTML:大学３回生の夏に始めた。テーブル操作のついでに勉強し始めた。
+                CSS:HTMLを学ぶついでに一緒にやった。Javascriptとかと絡むとややこしい
+                Javascript:インターンシップで勉強を始めた。文法がCと似ていてなれるのに時間がかからなかった。
+                だけど、フレームワーク独自の文法もあるのでそこにはてこずっている。"
                 ></ContentButton>
-                <ContentButton myColor="aqua" myTitle="コンテンツ" myText="
-                    404ページ"
+                <ContentButton selfId="contet" myColor="aqua" myTitle="コンテンツ" myText="404ページ"
                 ></ContentButton>
             </div>
         </div>
@@ -55,6 +66,10 @@
 </div>
 </template>
 <style>
+#top{
+    transition:fixed;
+    position:(0,0);
+}
 .sq{
     background:yellow;
     Height:100px;
