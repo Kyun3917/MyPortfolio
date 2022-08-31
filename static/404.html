@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html id="click">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>404 not found</title>
+<style>
+body{
+    text-align:center;
+    background:rgb(255, 241, 84);
+}
+#ul{
+    position:absolute;
+    transition:.1s;
+    list-style:none;
+    display:flex;
+}
+#list{
+    position:fixed;
+    Height:1280px;
+    border:0;
+    border-left:solid 50px white;
+    border-right:solid 50px rgb(255, 241, 84);
+    margin-left:41px;
+    transform:rotate(-45deg);
+}
+.text{
+    z-index:200;
+}
+#MenuButton{
+    position:fixed;
+    transition:.1s;
+    transform:translate(-50%,-50%);
+
+    font-size:25px;
+    background:rgba(255, 255, 255, 0.495);
+    border:solid 2px black;
+    font-weight:bolder;
+    white-space:nowrap;
+}
+#Fall1{
+    position:fixed;
+    transition:0.1s;
+    white-space:nowrap;
+    font-weight:bolder;
+    margin-left:-75px;
+}
+#Fall2{
+    position:fixed;
+    transition:0.1s;
+    white-space:nowrap;
+    font-weight:bolder;
+    margin-left:-25px;
+}
+#Fall3{
+    position:fixed;
+    transition:0.1s;
+    white-space:nowrap;
+    font-weight:bolder;
+    margin-left:25px;
+}
+</style>
+</head>
+
+<body id="click">
+    <ul id="ul">
+        <li id="list"></li>
+        <li id="list"></li>
+        <li id="list"></li>
+        <li id="list"></li>
+        <li id="list"></li>
+        <li id="list"></li>
+        <li id="list"></li>
+        <li id="list"></li>
+
+    </ul>
+    <div class="text">
+    <fall id="Fall1">404</fall> <fall id="Fall2">NOT</fall><fall id="Fall3">FOUND</fall><br>
+    <p>お探しのページは見つかりませんでした</p>
+    </div>
+    <a href="https://pscsrv.co.jp/">
+            <RetMenu id="MenuButton" type="button">
+                <p>トップページへ戻る</p>
+            </RetMenu>
+    </a>
+    <span id="click"></span>
+</body>
+<script type="text/javascript">
+    /*function CSSStyle(id){
+        var i;
+        for(i=1;i<window.innerWidth+1;i++){
+            document.createElement("li");
+            id2=document.getElementById("list");
+            id2.style.left=(id2.style.right-id2.style.left)*i+"px";
+            document.ul.insertBefore("li",id2);
+        }
+    }*/
+    function MoveButton(MenuButton){
+        var MenuButton = document.getElementById("MenuButton");
+        var x=0;
+        var y=0;
+        var rad=0;
+        
+        var timer=setInterval(function(){
+            rad+=0.1*Math.PI;
+            if(rad>=2*Math.PI)
+                rad=0;
+            x=100*Math.sin(rad)+window.innerWidth/2;
+            y=100*Math.cos(rad)+window.innerHeight/2;    
+            MenuButton.style.left=x+"px";
+            MenuButton.style.top=y+"px";
+        },100);
+    }
+    function rotation(id,direc){
+        var rotation=document.getElementById(id);
+        var x=5+rotation.style.left;
+        var y=5+rotation.style.top;
+        var cx=(rotation.style.left+rotation.style.right)/2;
+        var cy=(rotation.style.top+rotation.style.bottom)/2;
+        var rotx;
+        var roty;
+        var angle=0;
+        var timer=setInterval(function(){
+            
+            angle+=direc*Math.atan2(y-cy,x-cx);
+            //rotx=(x-cx)*Math.cos(angle)-(y-cy)*Math.sin(angle)+cx;
+            //roty=(x-cx)*Math.sin(angle)+(y-cy)*Math.cos(angle)+cy;
+            rotx=Math.sqrt((x-cx)*(x-cx)+(y-cy)*(y-cy))*(angle-Math.sin(angle)+cx);
+            roty=Math.sqrt((x-cx)*(x-cx)+(y-cy)*(y-cy))*(1-Math.cos(angle)+cy);
+            rotation.style.rotate=angle+"rad";    
+            rotation.style.left=rotx+Window.innerWidth+"px";
+            //rotation.style.top=-1*roty+"px";
+        },100);
+        
+    }
+    function freeFall(id){
+            var tags=document.getElementById(id);
+            var x=window.innerWidth/2;
+            var aft_x=0;
+            var y;
+            var y0=0;
+            var t=0;
+            var v0=0;
+            var pre_v;
+
+            var cx=(tags.style.left+tags.style.right)/2;
+            var cy=(tags.style.top+tags.style.bottom)/2;
+            var rotx;
+            var roty;
+            var angle=0;
+
+            var timer=setInterval(function(){
+                t+=1;
+                y=v0*t+4.9*t*t;
+                if(y+y0>window.innerHeight/2-tags.style.bottom){
+                    if(v0==0){
+                        aft_x=10*(Math.random()-0.5);
+                    }
+                    v0=-0.8*pre_v;
+                    t=0;   
+                    y0=window.innerHeight/2-tags.style.bottom;
+                    y=0;
+                }else{
+                    pre_v=v0+9.8*t;
+                }
+                x+=aft_x;
+
+                /*angle+=0.5*Math.atan2(y-cy,x-cx);
+                rotx+=Math.sqrt((x-cx)*(x-cx)+(y-cy)*(y-cy))*(angle-Math.sin(angle));
+                roty+=Math.sqrt((x-cx)*(x-cx)+(y-cy)*(y-cy))*(1-Math.cos(angle));
+
+                tags.style.rotate=angle+"rad"; */   
+                tags.style.left=x+"px";
+                tags.style.top=y+y0+"px";
+                /*if(t>50){
+                tags.style.left=rotx+"px";
+                tags.style.top=-1*roty+"px";
+                angle=Math.atan2(y-cy,x-cx);
+                }*/
+            },100);
+        }
+    var i;
+    MoveButton("MoveButton");
+    ul=document.getElementById("ul");
+    ul.style.left=window.innerWidth/2+"px";
+    ul.style.top=-250+"px";
+    //CSSStyle("ul");
+    var flag=0;
+    var timer=setInterval(function(){
+        document.getElementById("click").onclick=function(){
+            flag++;
+            switch(flag){
+                case 1:
+                    freeFall("Fall1");
+                    rotation("Fall1",10*(Math.random()-0.5));  
+                    break;
+                case 2:
+                    freeFall("Fall2");
+                    rotation("Fall2",10*(Math.random()-0.5));
+                    break;
+                case 3:
+                    freeFall("Fall3");
+                    rotation("Fall3",10*(Math.random()-0.5));
+                break;
+            }
+        }
+    },100);
+</script>
+</html>

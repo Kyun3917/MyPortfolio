@@ -6,7 +6,7 @@
                 <h2 style='font-size:large'>{{myTitle}} [{{plusButton}}]</h2>
                 <div class="col-sm-8 col-sm-offset-2">
                     <transition name="text">
-                        <div  id="mainText"  v-show="show">{{myText}}</div>
+                        <div  id="mainText"  v-show="show"><slot /></div>
                     </transition>
                 </div>
             </div>
@@ -14,9 +14,6 @@
     </div>
 </template>
 <style>
-    #mainText{
-        white-space:pre-wrap;
-    }
     .text-enter,.text-leave-to{
         opacity:0;
     }
@@ -39,7 +36,6 @@
         props:[
             "myTitle",
             "myColor",
-            "myText",
             "selfId",
         ],
         methods:{

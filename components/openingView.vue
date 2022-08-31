@@ -1,31 +1,57 @@
 <template>
-    <transition-group name="list" tag="ul">
-        <li class="click" v-bind:style="{position:(Tx,Ty)}" key="op1">クリック</li>
-        <li class="stripe1" v-bind:style="{width:fullwidth,height:fullheight}" v-show="Move"
+    <transition-group name="op" tag="opAnimation">
+        <li class="stripe1" v-bind:style="{width:fullwidth,height:fullheight,cursor:'pointer'}" v-show="Move"
         @click="Moving" key="op2"></li>
+        <li class="click" ref="click2" key="op2" v-bind:style="{left:Tx+'px',top:Ty+'px'}" v-show="Move"
+        @click="Moving">CLICK</li>
     </transition-group>
 </template>
 <style>
+opAnimation{
+    list-style:none;
+}
 .click{
-    position:absolute;
-    font-size:large;
+    position:fixed;
+    left:50%;
+    top:50%;
+    font-size:50px;
+    color:rgb(61, 17, 17);
     z-index:2001;
+
+    animation:flash 2s linear infinite;
+}
+@keyframes flash{
+    0%,100%{
+        opacity: 1;
+        color:black
+    }
+    50%{
+        opacity:0;
+        color:red;
+    }
 }
 .stripe1{
     position:fixed;
-    background:repeating-linear-gradient(
-        yellow 0px,yellow 50px, orange 50px, orange 100px
+    background:-moz-linear-gradient(
+        left,white,orange
     );
+    background:-webkit-linear-gradient(
+        left, white,orange
+    );
+    background:linear-gradient(
+        to right,white,orange
+    );
+
     z-index: 2000;
 }
-.ul-leave{
+.op-leave{
     opacity:1;
 }
-.ul-leave-to{
+.op-leave-to{
     opacity:0;
     transform:translateX(1000px);
 }
-.ul-leave-active{
+.op-leave-active{
     transition:all 3s;
 }
 </style>
@@ -36,8 +62,8 @@ export default{
             fullwidth:window.innerWidth+'px',
             fullheight:window.innerHeight+'px',
             Move:true,
-            Tx:window.innerWidth/2,
-            Ty:window.innerHeight/2,
+            Tx:window.innerWidth/2+'px',
+            Ty:window.innerHeight/2+'px',
         };
     },
     methods:{
@@ -47,10 +73,16 @@ export default{
         },
         Moving(){
             this.Move=!this.Move
-        }
+        },
+        getTarget(){
+            this.Tx=(-1*this.$refs.click2.clientWidth+window.innerWidth)/2
+            this.Ty=(-1*this.$refs.click2.clientHeight+window.innerHeight)/2
+        },
     },
     mounted(){
-        window.addEventListener('resize',this.handleResize);
+        window.addEventListener('resize',this.handleResize)
+        this.getTarget()
+        window.addEventListener('resize',this.getTarget)
     },
     beforeDestroy(){
         window.removeEventListener('resize',this.handleResize)
