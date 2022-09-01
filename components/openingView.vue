@@ -1,9 +1,8 @@
 <template>
     <transition-group name="op" tag="opAnimation">
-        <li class="stripe1" v-bind:style="{width:fullwidth,height:fullheight,cursor:'pointer'}" v-show="Move"
-        @click="Moving" key="op2"></li>
-        <li class="click" ref="click2" key="op2" v-bind:style="{left:Tx+'px',top:Ty+'px'}" v-show="Move"
-        @click="Moving">CLICK</li>
+        <li class="stripe1" v-bind:style="{width:fullwidth,height:fullheight}" v-show="Move" key="op2"></li>
+        <li class="click" ref="click2" key="op1" v-bind:style="{left:Tx+'px',top:Ty+'px',cursor:'pointer'}" v-show="Move"
+        @click.once="Moving">CLICK</li>
     </transition-group>
 </template>
 <style>

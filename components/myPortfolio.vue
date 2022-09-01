@@ -4,7 +4,6 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
      <a class="navbar-brand" href="#top">My Portfolio</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
-        <p>aaaa</p>
         <span class="navbar-toggler-icon">
         </span>
       </button>
@@ -25,9 +24,11 @@
          </ul>
      </div>
     </nav>
+    <div class="lines">
     <div class="jumbotron" style='text-align:center'>
         <h1>ポートフォリオへようこそ</h1>
         <p>多くのコンテンツはありませんが、どうぞご覧ください。</p>
+    </div>
     </div>
     <div class="jumbotron" style="{margin:auto}">
         <div class="container-fluid">
@@ -71,11 +72,40 @@
 </div>
 </template>
 <style>
+.lines{
+    position:relative;
+    border:solid 2px;
+    animation:expandLine 2s linear infinite;
+    transition:2s;
+}
+.lines:before{
+    content:'';
+    position:absolute;
+    left:100%;
+    bottom:0;
+    width:0;
+    transform:translateX(-100%);
+    border-bottom:solid 2px black;
+    animation:expandLine 3s linear infinite;
+}
+@keyframes expandLine{
+    0%,100%{
+       border-width:0px;
+       border-color:black;
+       width:0%;
+    }
+    50%{
+        border-width:2px;
+        border-color:red;
+        width:100%;
+    }
+
+}
 #top{
     transition:fixed;
 }
 
-.sq{
+.sq:hover{
     background:yellow;
     Height:100px;
     Width:200px;
@@ -91,7 +121,6 @@ import OpeningView from './openingView.vue';
             sqPos: 100,
             FLAG: true,
             plusButton: "+",
-            showNav:"hidden",
         };
     },
     methods: {
