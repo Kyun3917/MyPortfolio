@@ -24,8 +24,8 @@
          </ul>
      </div>
     </nav>
-    <div class="lines"></div>
-    <div class="jumbotron" style='text-align:center'>
+    <div class="lines1"></div>
+    <div class="jumbotron lines1" style='text-align:center'>
         <h1>ポートフォリオへようこそ</h1>
         <p>多くのコンテンツはありませんが、どうぞご覧ください。</p>
     </div>
@@ -71,12 +71,22 @@
 </div>
 </template>
 <style>
-.lines{
+.lines1{
     position:relative;
-    border:solid 2px red;
+}
+.lines1::before{
+    position:absolute;
+    content:"";
+    height:101%;
+    width:100%;
+    left:0;
+    top:0;
+    padding-bottom:1px;
+    background:linear-gradient(
+       to right,white 0%, orange 50%,white 100%
+    );
     animation:expandLine 2s  infinite;
-    transform-origin:left;
-    
+    z-index:-1;
 }
 @keyframes expandLine{
     0%,100%{

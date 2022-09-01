@@ -1,11 +1,10 @@
 <template>
     <div v-bind="{id:selfId}">
-       <div class="col-fluid" v-bind:style="{'background-color':myColor,cursor:'pointer'}" type="checkbox" @click="showing" 
+       <div class="col-fluid box" v-bind:style="{'background-color':myColor,cursor:'pointer'}" type="checkbox" @click="showing" 
        @mouseover="gageFlag=true" @mouseleave="gageFlag=false">
             <div class="border-left border-primary" style="padding:10px">
-                <h2 style='font-size:large'>{{myTitle}} [{{plusButton}}]</h2>
+                <h2 v-bind:style="{'font-size':large,'z-index':10}">{{myTitle}} [{{plusButton}}]</h2>
                 <div class="col-sm-8 col-sm-offset-2">
-                    <div class="gage gageLeft" ></div>
                     <transition name="text">
                         <div  id="mainText"  v-show="show"><slot /></div>
                     </transition>
@@ -25,7 +24,25 @@
     border:solid 2px;
     border-width:100%;
     border-color:black;
+    transition:all 0.5s;
+}
+.box{
+    position:relative;
+}
+.box::before{
+    position:absolute;
+    content:'';
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    transform-origin:left;
+    transform:scaleX(0);
     transition:all 0.3s;
+}
+.box:hover::before{
+    transform:scaleX(1);
+    background:yellow;
 }
 
 .text-enter,.text-leave-to{
