@@ -24,11 +24,10 @@
          </ul>
      </div>
     </nav>
-    <div class="lines">
+    <div class="lines"></div>
     <div class="jumbotron" style='text-align:center'>
         <h1>ポートフォリオへようこそ</h1>
         <p>多くのコンテンツはありませんが、どうぞご覧ください。</p>
-    </div>
     </div>
     <div class="jumbotron" style="{margin:auto}">
         <div class="container-fluid">
@@ -74,38 +73,27 @@
 <style>
 .lines{
     position:relative;
-    border:solid 2px;
-    animation:expandLine 2s linear infinite;
-    transition:2s;
-}
-.lines:before{
-    content:'';
-    position:absolute;
-    left:100%;
-    bottom:0;
-    width:0;
-    transform:translateX(-100%);
-    border-bottom:solid 2px black;
-    animation:expandLine 3s linear infinite;
+    border:solid 2px red;
+    animation:expandLine 2s  infinite;
+    transform-origin:left;
+    
 }
 @keyframes expandLine{
     0%,100%{
-       border-width:0px;
-       border-color:black;
-       width:0%;
+        transform:scaleX(0);
     }
     50%{
-        border-width:2px;
-        border-color:red;
-        width:100%;
+        transform:scaleX(1);
     }
+    
 
+    
 }
 #top{
     transition:fixed;
 }
 
-.sq:hover{
+.sq{
     background:yellow;
     Height:100px;
     Width:200px;
