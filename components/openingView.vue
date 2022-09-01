@@ -1,7 +1,7 @@
 <template>
     <transition-group name="op" tag="opAnimation">
         <li class="stripe1" v-bind:style="{width:fullwidth,height:fullheight}" v-show="Move" key="op2"></li>
-        <li class="click" ref="click2" key="op1" v-bind:style="{left:Tx+'px',top:Ty+'px',cursor:'pointer'}" v-show="Move"
+        <li class="click" ref="click2" key="op1" v-bind:style="{left:Tx+'px',top:Ty+'px',cursor:'pointer',overflow:prohibitedScr}" v-show="Move"
         @click.once="Moving">CLICK</li>
     </transition-group>
 </template>
@@ -63,6 +63,7 @@ export default{
             Move:true,
             Tx:window.innerWidth/2+'px',
             Ty:window.innerHeight/2+'px',
+            prohibitedScr:"hidden",
         };
     },
     methods:{
@@ -72,6 +73,8 @@ export default{
         },
         Moving(){
             this.Move=!this.Move
+            this.prohibitedScr="visible"
+            
         },
         getTarget(){
             this.Tx=(-1*this.$refs.click2.clientWidth+window.innerWidth)/2
