@@ -1,5 +1,7 @@
 <template>
     <transition-group name="op" tag="opAnimation">
+        <li class="circle" v-bind:style="{width:radius+'px',height:radius+'px',top:cPosX+'px',left:cPosY+'px',
+        animation:'fCircle 2s linear infinite'}" v-show="Move" key="op3"></li>
         <li class="stripe1" v-bind:style="{width:fullwidth,height:fullheight}" v-show="Move" key="op2"></li>
         <li class="click" ref="click2" key="op1" v-bind:style="{left:Tx+'px',top:Ty+'px',cursor:'pointer',overflow:prohibitedScr}" v-show="Move"
         @click.once="Moving">CLICK</li>
@@ -18,6 +20,30 @@ opAnimation{
     z-index:2001;
 
     animation:flash 2s linear infinite;
+}
+.circle{
+position:fixed;
+background:rgba(255, 166, 0, 0);
+border:solid 5px rgb(38, 163, 0);
+height:100px;
+width:100px;
+top:100px;
+left:100px;
+border-radius:50%;
+z-index:2002;
+}
+@keyframes fCircle{
+    0%{
+        opacity:1;
+        transform:scale(0);
+    }
+    50%{
+        opacity:0;
+        transform:scale(1);
+    }
+    100%{
+        opacity:0;
+    }
 }
 @keyframes flash{
     0%,100%{
@@ -64,6 +90,9 @@ export default{
             Tx:window.innerWidth/2+'px',
             Ty:window.innerHeight/2+'px',
             prohibitedScr:"hidden",
+            radius:100,
+            cPosX:Math.random()*10,
+            cPosY:Math.random()*10,
         };
     },
     methods:{
@@ -80,11 +109,18 @@ export default{
             this.Tx=(-1*this.$refs.click2.clientWidth+window.innerWidth)/2
             this.Ty=(-1*this.$refs.click2.clientHeight+window.innerHeight)/2
         },
+        cClick(e){
+            this.radius=Math.random()*400
+            this.cPosX=e.clinetX
+            this.cPosY=e.clientY
+        }
     },
     mounted(){
         window.addEventListener('resize',this.handleResize)
         this.getTarget()
         window.addEventListener('resize',this.getTarget)
+        window.addEventListener('click',this.cClick)
+    
     },
     beforeDestroy(){
         window.removeEventListener('resize',this.handleResize)

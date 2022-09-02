@@ -7,7 +7,6 @@
                     <transition name="text">
                         <div  id="mainText" v-show="show"><slot /></div>
                     </transition>
-                    
                 </div>
             </div>
         </div>
