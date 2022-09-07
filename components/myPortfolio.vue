@@ -59,8 +59,9 @@
                         <img src="404thumbnail.jpg" title="404 not found" width="192px" height="108px">
                     </a>
                     <a href="microbitSampleGetTemp.html" target="_blank">microBit温度計</a>
-                    <a href="microbitMygame.html" target="_blank">microbitゲーム</a>
+                    <a href="microbitGyroSample.html" target="_blank">microbitゲーム</a>
                     <a href="microbitButtonSample.html" target="_blank">microbitボタンサンプル</a>
+                    <a href="microbitMyGyro.html" target="_blank">microbitジャイロ</a>
                 </ContentButton>
             </div>
         </div>

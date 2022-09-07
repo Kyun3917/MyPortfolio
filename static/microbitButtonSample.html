@@ -8,12 +8,13 @@
         Bluetooth接続サンプル
         <input type="button" value="スタート" onclick="pushStart()" />
         <input type="button" value="ストップ" onclick="pushStop()" />
-        <div id="buttonA">ああああ
-        </div>
-        <div id="buttonB">ああああ
-        </div>
+        <div id="buttonA">ああああ</div>
+        <div id="buttonB">ああああ</div>
+        X:<div id="AccX"></div>
+        Y:<div id="AccY"></div>
+        Z:<div id="AccZ"></div>
         <script>
-            let charaA, charaB;
+            let charaA, charaB,charaACC;
             function hello(){
                 console.log("hello");
             }
@@ -23,13 +24,19 @@
                 let buttonUuid =  "E95D9882-251D-470A-A062-FA1922DFA9A8";
                 let AButtonUuid = "E95DDA90-251D-470A-A062-FA1922DFA9A8";
                 let BButtonUuid = "E95DDA91-251D-470A-A062-FA1922DFA9A8";
-                //デバイスの取得
+                let ACCELEROMETER_SERVICE_UID="E95D0753-251D-470A-A062-FA1922DFA9A8";
+                let ACCELEROMETER_CHARACTERISTICS_UID="E95DCA4B-251D-470A-A062-FA1922DFA9A8";//デバイスの取得
                 navigator.bluetooth.requestDevice(
                     //デバイスにフィルターかけて、マイクロビットだけが見えるようにできる
                     //ようですが上手くいかなかったので、とりあえず全デバイスを許可
                     //{filters: [{services:[buttonUuid.toLowerCase()]}] }
-                    {acceptAllDevices:true,optionalServices:[buttonUuid.toLowerCase()]}
-                ).then(         //デバイス取得できたら
+                    {
+                        filters:[
+                            {namePrefix:"BBC micro:bit"}
+                        ],
+                    optionalServices:[buttonUuid.toLowerCase()]
+                    })
+                    .then(         //デバイス取得できたら
                     device => {
                         console.log('Connecting micro:bit');
                         return device.gatt.connect();
@@ -38,6 +45,7 @@
                     server => {
                         console.log('Getting Service');
                         return server.getPrimaryService(buttonUuid.toLowerCase());
+                        //return server.getPrimmaryService(ACCELEROMETER_SERVICE_UID.toLowerCase());
                     }
                 ).then(         //サービスが取得できたら
                     service => {
@@ -53,8 +61,7 @@
                                 chara.startNotifications();
                                 //リスナー関数の設定
                                 chara.addEventListener('characteristicvaluechanged',listenerButtonA);
-                            }
-                            ),
+                            }),
                             //characteristicsの取得（Bボタン用）
                             service.getCharacteristic(BButtonUuid.toLowerCase())
                             .then(chara => {
@@ -64,8 +71,15 @@
                                 chara.startNotifications();
                                 //リスナー関数の設定
                                 chara.addEventListener('characteristicvaluechanged',listenerButtonB);
-                            }
-                            )
+                            }),
+                            //characteristicsの取得（加速度用）
+                            service.getCharacteristic(ACCELEROMETER_CHARACTERISTICS_UID.toLowerCase())
+                            .then(chara => {
+                                charaACC=chara;
+                                chara.startNotifications();
+                                chara.addEventListener('characteristicvaluechanged',accelerometerChanged);   
+	                        })
+
                         ]);
                     }
                 )
@@ -125,6 +139,26 @@
                         return '長押しされました';
                    break;
                 }
+            }
+            function accelerometerChanged(event)
+            {
+                // 加速度X座標
+                let accelX = event.target.value.getInt16(0, true)/1000.0;
+                // 加速度Y座標
+                let accelY = event.target.value.getInt16(2, true)/1000.0;
+                // 加速度Z座標
+                let accelZ = event.target.value.getInt16(4, true)/1000.0;
+                // 角度
+                angle = Math.atan2(accelZ, accelX) * (180.0 / Math.PI);
+                if (accelZ > 0)
+                {
+                    angle = 360.0 - angle;
+                }
+                angle = Math.abs(angle);
+                document.getElementById('AccX').innerHTML = accelX;
+                document.getElementById('AccY').innerHTML = accelY;
+                document.getElementById('AccZ').innerHTML = accelZ;
+
             }
         </script>
     </body>
