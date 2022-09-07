@@ -7,7 +7,10 @@
 <style>
 body{
     text-align:center;
-    background:rgb(255, 241, 84);
+    background-image:linear-gradient(
+   45deg, #fff 25%, yellow 25%, yellow 50%, #fff 50%, #fff 75%,yellow 75%, yellow
+  );
+  background-size:100px 100px;
 }
 #ul{
     position:absolute;
@@ -19,10 +22,17 @@ body{
     position:fixed;
     Height:1280px;
     border:0;
-    border-left:solid 50px white;
-    border-right:solid 50px rgb(255, 241, 84);
     margin-left:41px;
     transform:rotate(-45deg);
+}
+#list:before{
+    content:"";
+    position:absolute;
+    height:100%;
+    width:100%;
+    left:0;
+    top:0;
+
 }
 .text{
     z-index:200;

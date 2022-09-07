@@ -77,7 +77,7 @@ z-index:2002;
     transform:translateX(1000px);
 }
 .op-leave-active{
-    transition:all 3s;
+    transition:all 2s;
 }
 </style>
 <script>
