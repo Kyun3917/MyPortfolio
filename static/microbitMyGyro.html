@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div id="area"/>
+    <div id="sq">↑</div>
+    <div id="car" />
+</body>
+<style>
+#area{
+    position:fixed;
+    width:100%;
+    height:100%;
+    border:solid;
+    margin:-8px;
+    background:rgb(129, 189, 38);
+    overflow:visible;
+}
+#sq{
+    position:fixed;
+    text-align:center;
+    font-size:100px;
+    width:200px;
+    height:200px;
+    right:1%;
+    bottom:1%;
+
+}
+#car{
+    position:fixed;
+    width:50px;
+    height:100px;
+    border-radius:5%;
+    left:500px;
+    top:500px;
+    border:solid 2px;
+    background:rgb(245, 97, 97);
+}
+#car:before{
+    content:"・　・";
+    text-align:center;
+    color:yellow;
+}
+</style>
+<script>
+            // 加速度サービスUUID
+const ACCELEROMETER_SERVICE_UUID = 'e95d0753-251d-470a-a062-fa1922dfa9a8';
+// 加速度キャラクタリスティックUUID
+const ACCELEROMETER_CHARACTERISTICS_UUID = 'e95dca4b-251d-470a-a062-fa1922dfa9a8';
+
+let microbit = null;
+let angle = null;
+let pre_angle=0;//前時刻の角度
+let timer = null;
+let x=500;//マシン左上のx座標
+let y=500;//マシン左上のy座標
+let v=5;//速度（予定）
+let flag=false;//bluetooth起動用
+let area=document.getElementById("area");//画面枠HTML要素
+let win_width=document.documentElement.clientWidth;//画面幅
+let win_height=document.documentElement.clientHeight;//画面高さ
+window.addEventListener('resize',function(){
+    win_width=document.documentElement.clientWidth;//画面幅
+    win_height=document.documentElement.clientHeight;
+    area.style.width=win_width+'px';
+    area.style.height=win_height+'px';
+});
+window.addEventListener('click',function(){
+    if(flag==false){
+        connect();
+        flag=true;
+    }else{
+        disconnect();
+        flag=false;
+    }
+});
+/* -----------------------------------------------
+ * ペアリング開始
+----------------------------------------------- */
+function connect()
+{
+	console.log('connect');
+
+	// BLEデバイスをスキャンする
+	navigator.bluetooth.requestDevice({
+		// acceptAllDevices: true,
+		filters: [{
+			namePrefix: 'BBC micro:bit'
+		}],
+		optionalServices: [ACCELEROMETER_SERVICE_UUID]
+	})
+	// デバイス接続する
+	.then(device => {
+		console.log(device);
+		microbit = device;
+		return device.gatt.connect();
+	})
+	// 加速度センササービスを取得する
+	.then(server => {
+		console.log(server);
+		return server.getPrimaryService(ACCELEROMETER_SERVICE_UUID);
+	})
+	// キャラクタリスティックを取得する
+	.then(service => {
+		console.log(service);
+		return service.getCharacteristic(ACCELEROMETER_CHARACTERISTICS_UUID);
+	})
+	// 加速度が変化したら指定したメソッドを呼び出す
+	.then(characteristic => {
+		console.log(characteristic);
+		characteristic.startNotifications();
+		characteristic.addEventListener('characteristicvaluechanged', accelerometerChanged);
+	})
+}
+
+/* -----------------------------------------------
+ * ペアリング解除
+----------------------------------------------- */
+function disconnect()
+{
+	console.log('disconnect');
+
+	if (!microbit || !microbit.gatt.connected)
+	{
+		return;
+	}
+	microbit.gatt.disconnect();
+}
+
+/* -----------------------------------------------
+ * 加速度センサの値が変化したら呼び出される
+----------------------------------------------- */
+function accelerometerChanged(event)
+{
+	// 加速度X座標
+	let accelX = event.target.value.getInt16(0, true)/1000.0;
+	// 加速度Y座標
+	let accelY = event.target.value.getInt16(2, true)/1000.0;
+	// 加速度Z座標
+	let accelZ = event.target.value.getInt16(4, true)/1000.0;
+	// 角度
+	angle = Math.atan2(accelZ, accelX) * (180.0 / Math.PI);
+	if (accelZ > 0)
+	{
+		angle = 360.0 - angle;
+	}
+	angle = Math.abs(angle);
+    //デバッグ用パラメータ表示
+    //document.getElementById("x").innerHTML=x+'px';
+    //document.getElementById("y").innerHTML=y+'px';
+    //document.getElementById("AccX").innerHTML=-1*angle-90+'degree';
+
+    //cx=(document.getElementById("car").style.left+document.getElementById("car").style.right)/2;
+    //cy=(document.getElementById("car").style.top+document.getElementById("car").style.bottom)/2;
+    //座標の更新
+    x+=v*Math.cos(angle*(Math.PI/180.0));
+    y-=v*Math.sin(angle*(Math.PI/180.0));
+
+    if(x<0)
+        x=0;
+    if(x>win_width-100)
+        x=win_width-100;
+    if(y<0)
+        y=0;
+    if(y>win_height-100)
+        y=win_height-100;
+    //スタイルの更新
+    document.getElementById("car").style.left=x+'px';
+    document.getElementById("car").style.top=y+'px';
+    document.getElementById("sq").style.rotate=-1*angle+90+'deg';
+    document.getElementById("car").style.rotate=-1*angle+90+'deg';
+    
+    //pre_v=document.getElementById("car").style.left;
+}
+    </script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>microbit</title>
+</head>
+<body>
+    <form name="js">
+        <input type="button" value="接続" onclick="connect();"/>
+        <input type="button" value="切断" onclick="disconnect();"/>
+        <input type="text" name="AButton" value=""/>
+        <input type="text" name="BButton" value=""/>
+    </form>
+</body>
+<script>
+    var button_device;
+    var button_characteristic;
+
+    var BUTTON_SERVICE_UUID ='E95D9882-251D-470A-A062-FA1922DFA9A8';
+    var BUTTON_A_STATE ='E95DDA90-251D-470A-A062-FA1922DFA9A8';
+
+    function connect(){
+        navigator.bluetooth.requestDevice({
+            filters:[{
+                namePrefix:'BBC micro:bit',
+            }],
+            optionalServices:[BUTTON_SERVICE_UUID]
+        })
+        .then(device =>{
+            button_device=device;
+            console.log("device",device);
+            return device.gatt.connect();
+        })
+        .then(server =>{
+            console.log("server",server)
+            return server.getPrimaryService(BUTTON_SERVICE_UUID);
+        })
+        .then(service =>{
+            console.log("service",service)
+            return service.getCharacteristic(BUTTON_A_STATE)
+        })
+        .then(chara =>{
+            console.log("BUTTON",chara)
+            alert("BLE接続が完了しました。");
+            Characteristic=chara;
+            Characteristic.startNotfications();
+            Characteristic.addEventListener('characteristicvaluechanged',onButtonValueChanged);
+        })
+        .catch(error =>{
+            alert("BLE接続に失敗しました。");
+            console.log(error);
+        });
+
+    }
+    function disconnect(){
+        if(!btton_device || button_device.gatt.connected){
+            return;
+        }
+        button_device.gatt.disconnect();
+        alert("BLE接続を切断しました。");
+    }
+</script>
+</html>

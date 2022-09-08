@@ -2,12 +2,11 @@
     <div v-bind="{id:selfId}">
        <div class="col-fluid box" v-bind:style="{'background-color':myColor,cursor:'pointer'}" type="checkbox" @click="showing">
             <div class="border-left border-primary" style="padding:10px">
-                <h2 v-bind:style="{'font-size':large}">{{myTitle}} [{{plusButton}}]</h2>
+                <h2 v-bind:style="{'font-size':20+'px'}">{{myTitle}} [{{plusButton}}]</h2>
                 <div class="col-sm-8 col-sm-offset-2">
                     <transition name="text">
                         <div  id="mainText" v-show="show"><slot /></div>
                     </transition>
-                    
                 </div>
             </div>
         </div>

@@ -1,13 +1,12 @@
 <template class="scroll">
-<div id="top" class="about">
+<div id="top" class="about" style="scroll-behavior: smooth;">
     <OpeningView/>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
      <a class="navbar-brand" href="#top">My Portfolio</a>
-     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-        </span>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav4">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
               <li class="nav-item active">
                   <a class="nav-link" href="#top">TOP<span class="sr-only">(current)</span></a>
@@ -51,23 +50,43 @@
                 </ContentButton>
 
                 <ContentButton selfId="contet" myColor="aqua" myTitle="コンテンツ">
-                    <a href="404.html" target="_blank">
-                        404ページ<br>
-                        <img src="404thumbnail.jpg" title="404 not found" width="192px" height="108px">
+                    <ul>
+                        <li>
+                            <a href="404.html" target="_blank">
+                            404ページ<br>
+                            <img src="404thumbnail.jpg" title="404 not found" width="192px" height="108px">
                     </a>
+                        </li>
+                        <li>
+                            <a href="microbitMyGyro.html" target="_blank">
+                            microbitジャイロ
+                            <img src="microbit_thumbnail.jpg" title="microbitジャイロ" width="192px" height="108px">
+                    </a>
+                        </li>
+                    </ul>
+                    <!--<a href="microbitSampleGetTemp.html" target="_blank">microBit温度計</a>
+                    <a href="microbitGyroSample.html" target="_blank">microbitゲーム</a>
+                    <a href="microbitButtonSample.html" target="_blank">microbitボタンサンプル</a>--> 
                 </ContentButton>
             </div>
         </div>
     </div>
-    <div v-if="FLAG===true">
-    <div v-bind:style="{background:'yellow',width:sqPos+'px',height:100+'px',
-    'border-style':'solid','border-width':2+'px','border-color':'black'}"
+    <!--<div v-if="FLAG===true">
+    <div v-bind:style="{background:'yellow',width:sqPos+'px',height:100+'px','border-radius':50+'%',
+    'border-style':'solid','border-width':2+'px','border-color':'black',cursor:'pointer'}"
      @click="addLine"></div>
      </div><div v-else-if="FLAG===false">
-     <div v-bind:style="{background:'yellow',width:sqPos+'px',height:100+'px',
-    'border-style':'solid','border-width':2+'px','border-color':'black'}"
+     <div v-bind:style="{background:'yellow',width:sqPos+'px',height:100+'px','border-radius':50+'%',
+    'border-style':'solid','border-width':2+'px','border-color':'black',cursor:'pointer'}"
      @click="removeLine"></div>
      </div>
+     <div v-if="count>=1">
+    </div>-->
+     <a @click="smoothly" style="cursor:pointer">
+        <div class="topScr">
+            <p v-bind:style="{'padding-top':10+'%', position:fixed, 'z-index':20}">TOP</p>
+        </div>
+    </a>
 </div>
 </template>
 <style>
@@ -95,11 +114,8 @@
     50%{
         transform:scaleX(1);
     }
-    
-
-    
 }
-#top{
+.toggleBar{
     transition:fixed;
 }
 
@@ -108,6 +124,41 @@
     Height:100px;
     Width:200px;
     border:solid 2px black;
+}
+.topScr{
+    position:fixed;
+    color:rgba(0, 0, 0, 0.4);
+    right:0;
+    bottom:0;
+    background:rgba(255, 250, 175, 0.4);
+    border:solid 1px;
+    height:50px;
+    width:50px;
+    border-radius:50%;
+    text-align:center;
+}
+.topScr::before{
+    position:absolute;
+    content:"↑";
+    font-size:medium;
+    height:100%;
+    width:100%;
+    left:0;
+    top:0;
+    padding-top:10%;
+    transform-origin:bottom;
+    transform:scaleY(0);
+    transition:0.3s;
+    border-radius:50%;
+}
+.topScr:hover::before{
+    transform:scaleY(1);
+    background:rgb(255, 204, 115,1);
+    border:solid 2px rgb(255, 204, 115,1);
+}
+ul{
+    list-style:none;
+    display:flex;
 }
 </style>
 <script>
@@ -118,11 +169,13 @@ import OpeningView from './openingView.vue';
         return {
             sqPos: 100,
             FLAG: true,
-            plusButton: "+",
+            toggleButton:false,
+            count:0,
         };
     },
     methods: {
         addLine() {
+            this.count++
             this.sqPos += 10;
             if (this.sqPos > 500)
                 this.FLAG = false;
@@ -132,8 +185,13 @@ import OpeningView from './openingView.vue';
             if (this.sqPos < 100)
                 this.FLAG = true;
         },
-
+        smoothly(){
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            })
+        },
     },
-    components: { ContentButton,OpeningView }
+    components: { ContentButton, OpeningView}
 }
 </script>
