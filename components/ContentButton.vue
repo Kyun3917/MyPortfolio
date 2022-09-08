@@ -15,7 +15,7 @@
 <style>
 h2{
     position:relative;
-    z-index:10;
+    z-index:1000;
 }
 .col-fluid:before{
     position:relative;
@@ -62,6 +62,10 @@ h2{
 .text-enter-active,.text-leave-active{
     transition:all 500ms;
     
+}
+.mainText{
+    position:relative;
+    z-index:1001;
 }
 </style>
 <script>
