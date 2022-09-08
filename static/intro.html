@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body id="click">
+    <h1>インターンシップ成果物発表</h1>
+    <div class="Right">
+        <p>2022/09/08</p>
+        <p>岡山県立大学</p>
+        <p>情報工学部・情報システム工学科</p>
+        <p>中川 真雄</p>    
+    </div>
+    <div class="link">
+        <p>作成した内容を公開しています‼ ぜひご覧ください。
+        </p>
+        <a href="https://nuxt-kyunportfolio.pages.dev">
+            https://nuxt-kyunportfolio.pages.dev
+        </a>
+    </div>
+    
+    
+</body>
+<style>
+    body{
+        background:linear-gradient(
+            to right,white 0%,rgb(159, 239, 135) 100%
+        );
+    }
+    h1{
+        text-align:left;
+        border-left:solid rgb(0,0,0) 2px;
+    }
+    .link{
+        text-align:center;
+        font-size:20px;
+        visibility: hidden;
+    }
+    .Right{
+        margin:10px;
+        position:absolute;
+        bottom:0px;
+        right:0px;
+        text-align:end;
+        border-right:solid rgb(0,0,0) 2px;
+    }
+</style>
+<script>
+    let id=document.getElementById("link");
+    window.addEventListener(('click'),function(){
+    id.style.visibility="visible";
+    });
+
+</script>
+</html>
