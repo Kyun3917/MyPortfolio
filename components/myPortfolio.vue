@@ -59,7 +59,7 @@
                         </li>
                         <li>
                             <a href="microbitMyGyro.html" target="_blank">
-                            microbitジャイロ
+                            microbitジャイロ<br>
                             <img src="microbit_thumbnail.jpg" title="microbitジャイロ" width="192px" height="108px">
                     </a>
                         </li>
