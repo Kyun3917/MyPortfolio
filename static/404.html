@@ -11,7 +11,20 @@ body{
    45deg, #fff 25%, yellow 25%, yellow 50%, #fff 50%, #fff 75%,yellow 75%, yellow
   );
   background-size:100px 100px;
+  overflow:hidden;
 }
+body:before{
+    content:"";
+    position:absolute;
+    margin:-10px;
+    height:100%;
+    width:100%;
+    transform-origin:right;
+    background:yellow;
+    transform:skew(45deg);
+    overflow:hidden;
+}
+
 #ul{
     position:absolute;
     transition:.1s;
@@ -28,6 +41,8 @@ body{
 #list:before{
     content:"";
     position:absolute;
+    left:0;
+    top:0;
     height:100%;
     width:100%;
     left:0;
@@ -35,6 +50,7 @@ body{
 
 }
 .text{
+    position:relative;
     z-index:200;
 }
 #MenuButton{
@@ -73,6 +89,7 @@ body{
 </head>
 
 <body id="click">
+    <div class="back"></div>
     <ul id="ul">
         <li id="list"></li>
         <li id="list"></li>
@@ -86,7 +103,7 @@ body{
     </ul>
     <div class="text">
     <fall id="Fall1">404</fall> <fall id="Fall2">NOT</fall><fall id="Fall3">FOUND</fall><br>
-    <p>お探しのページは見つかりませんでした</p>
+    <p class="text">お探しのページは見つかりませんでした</p>
     </div>
     <a href="https://nuxt-kyunportfolio.pages.dev/">
             <RetMenu id="MenuButton" type="button">

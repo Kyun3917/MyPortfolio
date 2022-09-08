@@ -3,11 +3,10 @@
     <OpeningView/>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
      <a class="navbar-brand" href="#top">My Portfolio</a>
-     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation"
-     @click="toggleButton=!toggleButton">
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav4">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
               <li class="nav-item active">
                   <a class="nav-link" href="#top">TOP<span class="sr-only">(current)</span></a>
@@ -24,9 +23,6 @@
          </ul>
      </div>
     </nav>
-    <div class="toggleBar" v-show="toggleButton">
-        <ToggleMenu selfHref="#prof" title="プロフィール"/>
-    </div>
     <div class="lines1"></div>
     <div class="jumbotron lines1" style='text-align:center'>
         <h1>ポートフォリオへようこそ</h1>
@@ -54,19 +50,28 @@
                 </ContentButton>
 
                 <ContentButton selfId="contet" myColor="aqua" myTitle="コンテンツ">
-                    <a href="404.html" target="_blank">
-                        404ページ<br>
-                        <img src="404thumbnail.jpg" title="404 not found" width="192px" height="108px">
+                    <ul>
+                        <li>
+                            <a href="404.html" target="_blank">
+                            404ページ<br>
+                            <img src="404thumbnail.jpg" title="404 not found" width="192px" height="108px">
                     </a>
-                    <a href="microbitSampleGetTemp.html" target="_blank">microBit温度計</a>
+                        </li>
+                        <li>
+                            <a href="microbitMyGyro.html" target="_blank">
+                            microbitジャイロ
+                            <img src="microbit_thumbnail.jpg" title="microbitジャイロ" width="192px" height="108px">
+                    </a>
+                        </li>
+                    </ul>
+                    <!--<a href="microbitSampleGetTemp.html" target="_blank">microBit温度計</a>
                     <a href="microbitGyroSample.html" target="_blank">microbitゲーム</a>
-                    <a href="microbitButtonSample.html" target="_blank">microbitボタンサンプル</a>
-                    <a href="microbitMyGyro.html" target="_blank">microbitジャイロ</a>
+                    <a href="microbitButtonSample.html" target="_blank">microbitボタンサンプル</a>--> 
                 </ContentButton>
             </div>
         </div>
     </div>
-    <div v-if="FLAG===true">
+    <!--<div v-if="FLAG===true">
     <div v-bind:style="{background:'yellow',width:sqPos+'px',height:100+'px','border-radius':50+'%',
     'border-style':'solid','border-width':2+'px','border-color':'black',cursor:'pointer'}"
      @click="addLine"></div>
@@ -76,14 +81,12 @@
      @click="removeLine"></div>
      </div>
      <div v-if="count>=1">
-        <p>aaaaaa</p>
-    </div>
+    </div>-->
      <a @click="smoothly" style="cursor:pointer">
         <div class="topScr">
             <p v-bind:style="{'padding-top':10+'%', position:fixed, 'z-index':20}">TOP</p>
         </div>
     </a>
-    <AbcDefg/>
 </div>
 </template>
 <style>
@@ -153,11 +156,14 @@
     background:rgb(255, 204, 115,1);
     border:solid 2px rgb(255, 204, 115,1);
 }
+ul{
+    list-style:none;
+    display:flex;
+}
 </style>
 <script>
 import ContentButton from './ContentButton.vue'
 import OpeningView from './openingView.vue';
-import ToggleMenu from './toggleMenu.vue';
     export default{
     data() {
         return {
@@ -186,6 +192,6 @@ import ToggleMenu from './toggleMenu.vue';
             })
         },
     },
-    components: { ContentButton, OpeningView, ToggleMenu}
+    components: { ContentButton, OpeningView}
 }
 </script>
