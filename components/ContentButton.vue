@@ -15,7 +15,7 @@
 <style>
 h2{
     position:relative;
-    z-index:10;
+    z-index:1000;
 }
 .col-fluid:before{
     position:relative;
@@ -44,6 +44,8 @@ h2{
     z-index:0;
 }
 .box:hover::before{
+    position:absolute;
+    content:"";
     transform:scaleX(1);
     background:rgb(252, 200, 200);
     z-index:0;
@@ -62,6 +64,10 @@ h2{
 .text-enter-active,.text-leave-active{
     transition:all 500ms;
     
+}
+.mainText{
+    position:relative;
+    z-index:1001;
 }
 </style>
 <script>
