@@ -69,8 +69,8 @@ export default {
   build: {},
   pwa:{
     icon:{
-      source:'SRC_DIR/static/icon_pwa.png',
-      filename:'icon_pwa.png'
+      source:'/icon_pwa.png',
+      filename:'icon_pwa.png',
     },
     manifest:{
       lang:'ja',
@@ -83,7 +83,7 @@ export default {
       orientation:'portrait',
       scope:'/',
       start_url:'/',
-      
+
     },
   }
 }
