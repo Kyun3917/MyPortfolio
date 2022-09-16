@@ -20,7 +20,9 @@ export default {
       { hid: 'og:site_name', property: 'og:site_name', content: '(きゅんのポートフォリオ)' },
       {hid:'og:url',property:'og:url',content:'https://nuxt-kyunportfolio.pages.dev/'},
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
-      { hid: 'description', name: 'description', content: '' },
+      {hid:'og:title',property:'og;title',content:'きゅんのポートフォリオ'},
+      {hid: 'og:image',property:'og:image',content:'OGPmain.jpg'},
+      { hid: 'description', name: 'description', content: 'きゅんのポートフォリオサイトです' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
