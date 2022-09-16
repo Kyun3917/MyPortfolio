@@ -14,6 +14,10 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'og:type',property:'og:type',content:'article'},
+      { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
+      { hid: 'og:site_name', property: 'og:site_name', content: '(きゅんのポートフォリオ)' },
+      { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
