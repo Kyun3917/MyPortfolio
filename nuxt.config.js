@@ -10,6 +10,7 @@ export default {
     title: 'Portfolio',
     htmlAttrs: {
       lang: 'en',
+      prefix:process.env.npm_package_name || '',
     },
     meta: [
       { charset: 'utf-8' },
@@ -17,6 +18,7 @@ export default {
       { hid: 'og:type',property:'og:type',content:'article'},
       { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
       { hid: 'og:site_name', property: 'og:site_name', content: '(きゅんのポートフォリオ)' },
+      {hid:'og:url',property:'og:url',content:'https://nuxt-kyunportfolio.pages.dev/'},
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
@@ -59,6 +61,10 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   pwa:{
+    icon:{
+      source:'SRC_DIR/static/icon_pwa.png',
+      filename:'icon_pwa.png'
+    },
     manifest:{
       lang:'ja',
       name:'MyPortfolio',
