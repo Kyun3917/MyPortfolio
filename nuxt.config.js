@@ -21,7 +21,9 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon_1.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon_1.ico' },
+  ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -37,6 +39,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/pwa',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -55,4 +58,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  pwa:{
+    manifest:{
+      lang:'ja',
+      name:'MyPortfolio',
+      short_name:"ポートフォリオ"
+    },
+  }
 }
