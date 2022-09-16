@@ -24,9 +24,14 @@ export default {
       {hid: 'og:image',property:'og:image',content:'/OGPmain.jpg'},
       { hid: 'description', name: 'description', content: 'きゅんのポートフォリオサイトです' },
       { name: 'format-detection', content: 'telephone=no' },
+
+      {name:'mobile-web-app-capable',content:'yes'},
+      {name:'apple-mobile-web-app-status-bar-style',content:'black'},
+      {name:'apple-mobile-web-app-title',content:'APP_TITLE'},
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon_1.ico' },
+      { rel:'apple-touch-startup-image',href:'/iphone6_splash.png',media:'(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)'}
   ],
   },
 
@@ -70,7 +75,15 @@ export default {
     manifest:{
       lang:'ja',
       name:'MyPortfolio',
-      short_name:"ポートフォリオ"
+      short_name:"ポートフォリオ",
+      discription:'キュンのポートフォリオサイトです',
+      display:'standalone',
+      theme_color:'#000',
+      background_color:'#fff',
+      orientation:'portrait',
+      scope:'/',
+      start_url:'/',
+      
     },
   }
 }
