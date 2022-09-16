@@ -44,6 +44,8 @@ h2{
     z-index:0;
 }
 .box:hover::before{
+    position:absolute;
+    content:"";
     transform:scaleX(1);
     background:rgb(252, 200, 200);
     z-index:0;

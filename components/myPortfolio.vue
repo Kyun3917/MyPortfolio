@@ -165,13 +165,6 @@ ul{
 import ContentButton from './ContentButton.vue'
 import OpeningView from './openingView.vue';
     export default{
-        head:{
-            meta:[
-                {hid: 'og:title',property:'ogtitle',contetn:'MyPortfolio'},
-                {hid: 'ogimage',property:'og:image',content:'OGPmain.jpg'},
-                {hid: 'og:description',property:'og:description',content:'このサイトはマオのポートフォリオです。'}
-            ]
-        },
     data() {
         return {
             sqPos: 100,
