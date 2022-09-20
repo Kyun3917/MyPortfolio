@@ -79,7 +79,7 @@ export default {
       discription:'キュンのポートフォリオサイトです',
       display:'standalone',
       theme_color:'#000',
-      background_color:'#fff',
+      background_color:'#D0FFD1',
       orientation:'portrait',
       scope:'/',
       start_url:'/',
