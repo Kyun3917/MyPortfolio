@@ -83,7 +83,14 @@ export default {
       orientation:'portrait',
       scope:'/',
       start_url:'/',
-
+      icons:[
+        {
+          src:'/icon_pwa.png',
+          sizes: '512x512',
+          type:'image/png',
+        }
+      ]
     },
+
   }
 }
