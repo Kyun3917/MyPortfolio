@@ -21,7 +21,7 @@ export default {
       {hid:'og:url',property:'og:url',content:'https://nuxt-kyunportfolio.pages.dev/'},
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
       {hid:'og:title',property:'og;title',content:'きゅんのポートフォリオ'},
-      {hid: 'og:image',property:'og:image',content:'/OGPmain.jpg'},
+      {hid: 'og:image',property:'og:image',content:'/image/OGPmain.jpg'},
       { hid: 'description', name: 'description', content: 'きゅんのポートフォリオサイトです' },
       { name: 'format-detection', content: 'telephone=no' },
 
