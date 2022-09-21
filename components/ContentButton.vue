@@ -15,6 +15,8 @@
 <style>
 h2{
     position:relative;
+    padding-top:50px;
+    padding-bottom:50px;
     z-index:1000;
 }
 .col-fluid:before{

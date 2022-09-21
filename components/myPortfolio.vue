@@ -1,24 +1,27 @@
 <template class="scroll">
 <div id="top" class="about" style="scroll-behavior: smooth;">
     <OpeningView/>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
-     <a class="navbar-brand" href="#top">My Portfolio</a>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
+     <a class="navbar-brand" @click="smoothly('top')" style="cursor: pointer">My Portfolio</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
               <li class="nav-item active">
-                  <a class="nav-link" href="#top">TOP<span class="sr-only">(current)</span></a>
+                  <a class="nav-link" @click="smoothly('top')" style="cursor: pointer">TOP<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#prof">プロフィール</a>
+                  <a class="nav-link" @click="smoothly('prof')" style="cursor: pointer">プロフィール</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#skill">スキル</a>
+                <a class="nav-link" @click="smoothly('hobby')" style="cursor:pointer">趣味</a>
               </li>
               <li class="nav-item">
-                    <a class="nav-link" href="#contet">コンテンツ</a>
+                  <a class="nav-link" @click="smoothly('skill')" style="cursor: pointer">スキル</a>
+              </li>
+              <li class="nav-item">
+                    <a class="nav-link" @click="smoothly('content')" style="cursor: pointer">コンテンツ</a>
               </li>
          </ul>
      </div>
@@ -34,10 +37,11 @@
                 <ContentButton selfId="prof" myColor="#98fb98" myTitle="プロフィール" >
                     <p>名前：マオ</p>
                     <p>年齢:21歳</p>
-                    <p>
-                    趣味:ゲーム:オンラインゲームやスマブラ、アクションゲームを中心に遊んでいます.
-                    旅行鉄道旅にはまっています。
-                    </p>
+                </ContentButton>
+                <ContentButton selfId="hobby" myColor="#CCCCFF" myTitle="趣味">
+                    <p>趣味:ゲーム、旅行</p>
+                    <p>オンラインゲームやスマブラ、アクションゲームを中心に遊んでいます.
+                    旅行鉄道旅にもはまっています。</p>
                 </ContentButton>
                 <ContentButton selfId="skill" myColor="yellow" myTitle="スキル">
                     <p>使える言語</p>
@@ -48,19 +52,18 @@
                     <p>CSS:HTMLを学ぶついでに一緒にやった。Javascriptとかと絡むとややこしい</p>
                     <p>Javascript：インターンシップで勉強を始めた。フレームワーク独自の文法にてこずっている。</p>
                 </ContentButton>
-
-                <ContentButton selfId="contet" myColor="aqua" myTitle="コンテンツ">
+                <ContentButton selfId="content" myColor="aqua" myTitle="コンテンツ">
                     <ul>
                         <li>
                             <a href="404.html" target="_blank">
                             404ページ<br>
-                            <img src="404thumbnail.jpg" title="404 not found" width="192px" height="108px">
+                            <img src="/image/404thumbnail.jpg" title="404 not found" width="192px" height="108px">
                     </a>
                         </li>
                         <li>
-                            <a href="microbitMyGyro.html" target="_blank">
+                            <a href="/microbit/microbitMyGyro.html" target="_blank">
                             microbitジャイロページ<br>
-                            <img src="microbit_thumbnail.jpg" title="microbitジャイロ" width="192px" height="108px">
+                            <img src="/image/microbit_thumbnail.jpg" title="microbitジャイロ" width="192px" height="108px">
                     </a>
                         </li>
                     </ul>
@@ -82,7 +85,8 @@
      </div>
      <div v-if="count>=1">
     </div>-->
-     <a @click="smoothly" style="cursor:pointer">
+    <p class="view"></p>
+     <a @click="smoothly('top')" style="cursor:pointer">
         <div class="topScr">
             <p v-bind:style="{'padding-top':10+'%', position:fixed, 'z-index':20}">TOP</p>
         </div>
@@ -90,6 +94,9 @@
 </div>
 </template>
 <style>
+.line{
+    position:relative;
+}
 .lines1{
     position:relative;
 }
@@ -159,6 +166,7 @@
 ul{
     list-style:none;
     display:flex;
+    flex-wrap:wrap;
 }
 </style>
 <script>
@@ -171,6 +179,7 @@ import OpeningView from './openingView.vue';
             FLAG: true,
             toggleButton:false,
             count:0,
+            scrY:100,
         };
     },
     methods: {
@@ -185,10 +194,11 @@ import OpeningView from './openingView.vue';
             if (this.sqPos < 100)
                 this.FLAG = true;
         },
-        smoothly(){
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
+        smoothly(scrId){
+            document.getElementById(scrId).scrollIntoView({
+                behavior:"smooth",
+                
+                
             })
         },
     },

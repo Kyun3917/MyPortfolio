@@ -21,7 +21,7 @@ export default {
       {hid:'og:url',property:'og:url',content:'https://nuxt-kyunportfolio.pages.dev/'},
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
       {hid:'og:title',property:'og;title',content:'きゅんのポートフォリオ'},
-      {hid: 'og:image',property:'og:image',content:'/OGPmain.jpg'},
+      {hid: 'og:image',property:'og:image',content:'/image/OGPmain.jpg'},
       { hid: 'description', name: 'description', content: 'きゅんのポートフォリオサイトです' },
       { name: 'format-detection', content: 'telephone=no' },
 
@@ -31,7 +31,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon_1.ico' },
-      { rel:'apple-touch-startup-image',href:'/iphone6_splash.png',media:'(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)'}
+      { rel:'apple-touch-startup-image',href:'/image/iphone6_splash.png',media:'(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)'}
   ],
   },
 
@@ -69,7 +69,7 @@ export default {
   build: {},
   pwa:{
     icon:{
-      source:'/icon_pwa.png',
+      source:'/image/icon_pwa.png',
       filename:'icon_pwa.png',
     },
     manifest:{
@@ -85,7 +85,7 @@ export default {
       start_url:'/',
       icons:[
         {
-          src:'/icon_pwa.png',
+          src:'/image/icon_pwa.png',
           sizes: '512x512',
           type:'image/png',
         }
