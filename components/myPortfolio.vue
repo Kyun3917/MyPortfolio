@@ -1,31 +1,28 @@
 <template class="scroll">
 <div id="top" class="about" style="scroll-behavior: smooth;">
     <OpeningView/>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 sticky-top">
-     <a class="navbar-brand" @click="smoothly('top')" style="cursor: pointer">My Portfolio</a>
-     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
-              <li class="nav-item active">
-                  <a class="nav-link" @click="smoothly('top')" style="cursor: pointer">TOP<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" @click="smoothly('prof')" style="cursor: pointer">プロフィール</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" @click="smoothly('hobby')" style="cursor:pointer">趣味</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" @click="smoothly('skill')" style="cursor: pointer">スキル</a>
-              </li>
-              <li class="nav-item">
-                    <a class="nav-link" @click="smoothly('content')" style="cursor: pointer">コンテンツ</a>
-              </li>
-         </ul>
-     </div>
-    </nav>
+    <b-navbar toggleable type="dark" variant="dark" fixed='top'>
+    <b-navbar-brand href="#">MyPortfolio</b-navbar-brand>
+
+    <b-navbar-toggle target="navbar-toggle-collapse">
+      <template #default="{ expanded }">
+        <b-icon v-if="expanded" icon="chevron-up"></b-icon>
+        <b-icon v-else icon="chevron-down"></b-icon>
+      </template>
+    </b-navbar-toggle>
+
+    <b-collapse id="navbar-toggle-collapse" is-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item href="#" @click="smoothly('top')">TOP</b-nav-item>
+        <b-nav-item href="#" @click="smoothly('prof')">Profile</b-nav-item>
+        <b-nav-item href="#" @click="smoothly('hobby')">Hobby</b-nav-item>
+        <b-nav-item href="#" @click="smoothly('skill')">Skill</b-nav-item>
+        <b-nav-item href="#" @click="smoothly('content')">Contrnts</b-nav-item>
+        <!-- b-nav-item href="#" disabled>Disabled</b-nav-item -->
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+
     <div class="lines1"></div>
     <div class="jumbotron lines1" style='text-align:center'>
         <h1>ポートフォリオへようこそ</h1>
@@ -99,6 +96,7 @@
 }
 .lines1{
     position:relative;
+    margin-top:50px;
 }
 .lines1::before{
     position:absolute;
@@ -121,9 +119,6 @@
     50%{
         transform:scaleX(1);
     }
-}
-.toggleBar{
-    transition:fixed;
 }
 
 .sq{
@@ -205,3 +200,4 @@ import OpeningView from './openingView.vue';
     components: { ContentButton, OpeningView}
 }
 </script>
+

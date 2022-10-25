@@ -1,3 +1,5 @@
+const webpack =require('webpack')
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -39,7 +41,9 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '@plugins/bootstrap-vue-icon.js'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -66,7 +70,14 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    vendor:["jquery"],
+    plugins:[
+      new webpack.ProvidePlugin({
+        $: "jquery"
+      })
+    ]
+  },
   pwa:{
     icon:{
       source:'/image/icon_pwa.png',

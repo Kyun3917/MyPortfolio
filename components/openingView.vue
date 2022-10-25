@@ -57,6 +57,7 @@ z-index:2002;
 }
 .stripe1{
     position:fixed;
+    margin-top:-50px;
     background:-moz-linear-gradient(
         left,white,orange
     );
